@@ -70,18 +70,12 @@ class Downloader
             retry: self::getRetryTime()
         ), true);
 
-        $url = null;
-        for ($i = 0; $i < count($data); ++$i) {
-            if (($data[$i]['prerelease'] ?? false) === true && ($source['prefer-stable'] ?? false)) {
-                continue;
-            }
-            if (!($source['match'] ?? null)) {
-                $url = $data[$i]['tarball_url'] ?? null;
-                break;
-            }
-            if (preg_match('|' . $source['match'] . '|', $data[$i]['tarball_url'])) {
-                $url = $data[$i]['tarball_url'];
-                break;
+        if (($source['prefer-stable'] ?? false) === false) {
+            $url = $data[0]['tarball_url'];
+        } else {
+            $id = 0;
+            while (($data[$id]['prerelease'] ?? false) === true) {
+                ++$id;
             }
         }
         if (!$url) {
@@ -129,6 +123,10 @@ class Downloader
             if (!$match_result) {
                 return $release['assets'];
             }
+            if ($source['match'] === 'Source code') {
+                $url = $release['tarball_url'];
+                break;
+            }
             foreach ($release['assets'] as $asset) {
                 if (preg_match('|' . $source['match'] . '|', $asset['name'])) {
                     $url = $asset['browser_download_url'];
@@ -141,6 +139,9 @@ class Downloader
             throw new DownloaderException("failed to find {$name} release metadata");
         }
         $filename = basename($url);
+        if ($source['match'] === 'Source code') {
+            $filename = $name . $filename . '.tar.gz';
+        }
 
         return [$url, $filename];
     }
