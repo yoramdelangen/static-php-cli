@@ -119,6 +119,10 @@
             "Linux": "partial",
             "BSD": "wip"
         },
+        "target": [
+            "static",
+            "shared"
+        ],
         "notes": true,
         "arg-type": "custom",
         "type": "builtin",
@@ -773,8 +777,7 @@
             "BSD": "wip"
         },
         "target": [
-            "static",
-            "shared"
+            "static"
         ],
         "notes": true,
         "type": "external",
@@ -1049,8 +1052,7 @@
             "BSD": "wip"
         },
         "target": [
-            "static",
-            "shared"
+            "static"
         ],
         "type": "builtin",
         "arg-type": "with-prefix",
