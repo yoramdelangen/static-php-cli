@@ -53,10 +53,7 @@ on:
         description: Keep debug symbols for debugging
         type: boolean
         default: false
-      vendor-mode:
-        description: Project is running in vendor-mode
-        type: boolean
-        default: false
+
   workflow_call:
     inputs:
       os:
