@@ -93,47 +93,6 @@ on:
         description: Keep debug symbols for debugging
         type: boolean
         default: false
-
-  workflow_call:
-    inputs:
-      os:
-        required: true
-        description: Build target OS
-        default: 'linux-x86_64'
-        type: string
-      php-version:
-        required: true
-        description: PHP version to compile
-        default: '8.4'
-        type: string
-      extensions:
-        description: Extensions to build (comma separated)
-        required: true
-        type: string
-      extra-libs:
-        description: Extra libraries to build (optional, comma separated)
-        type: string
-      build-cli:
-        description: Build cli binary
-        default: true
-        type: boolean
-      build-micro:
-        description: Build phpmicro binary
-        type: boolean
-      build-fpm:
-        description: Build fpm binary
-        type: boolean
-      prefer-pre-built:
-        description: Prefer pre-built binaries (reduce build time)
-        type: boolean
-        default: true
-      debug:
-        description: Show full build logs
-        type: boolean
-      no-strip:
-        description: Keep debug symbols for debugging
-        type: boolean
-        default: false
       vendor-mode:
         description: Project is running in vendor-mode
         type: boolean
